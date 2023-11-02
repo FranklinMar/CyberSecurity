@@ -16,17 +16,18 @@ namespace Lab2
         static void Main()
         {
             //AppForm.AllocConsole();
-            AppForm.AllocConsole();
             TrithemiusCypher UA = new("אבגד´הו÷זחט³¿יךכלםמןנסעףפץצקרשü‏ÿ");
             UA.Name = "UA";
             TrithemiusCypher EN = new("abcdefghijklmnopqrstuvwxyz");
             EN.Name = "EN";
-            Console.WriteLine(UA.Key);
-            Console.WriteLine(EN.Key);
+            VigenereCracker Cracker_UA = new(UA);
+            VigenereCracker Cracker_EN = new(EN);
+            //Console.WriteLine(UA.Key);
+            //Console.WriteLine(EN.Key);
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new AppForm(new List<ICypher> { UA, EN }, null));
+            Application.Run(new AppForm(new List<ICypher> { UA, EN }, new List<ICracker> { Cracker_UA, Cracker_EN }));
         }
     }
 }

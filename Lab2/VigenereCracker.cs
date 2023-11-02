@@ -113,7 +113,7 @@ namespace Lab2
             string WholeEncryptedText = Regex.Replace(EncryptedText, _Regex, "");
             //string PlainWord;
             //string EncryptedWord;
-            for (int i = 0; i <= KeysLengths.Count; i++)
+            for (int i = 0; i < KeysLengths.Count; i++)
             {
                 //MatchingWords = 0;
                 Key = new();

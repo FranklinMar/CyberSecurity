@@ -148,7 +148,7 @@ namespace Lab1
             }
             
             string Key = cracker.Key;
-            string cracked;
+            string cracked = "";
             try
             {
                 if (resultText.Text == "")
@@ -160,16 +160,19 @@ namespace Lab1
                 }
             } catch (NotImplementedException)
             {
-                cracked = cracker
+                Key = cracker.Crack(textField.Text, resultText.Text);
             } catch(Exception exception)
             {
                 MessageBox.Show($"Unexpected error.\n{exception.Message}");
-                cracker.Key = Key;
+                //cracker.Key = Key;
                 return;
             }
             //cracker.Key = Key;
             keyInput.Text = Key;
-            result.Text = cracked;
+            if (cracked != "")
+            {
+                result.Text = cracked;
+            }
         }
 
 
