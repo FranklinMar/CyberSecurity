@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Lab1
 {
@@ -22,18 +20,10 @@ namespace Lab1
                 {
                     throw new ArgumentNullException(nameof(Alphabet)); // "Empty string"
                 }
-                /*for (int i = 0; i < value.Length - 1; i++)
-                {
-                    if (value[i] < value[i + 1])
-                    {
-                        throw new ArgumentException("Alphabet not sorted");
-                    }
-                }*/
                 ALPHABET = value;
             }
         }
         protected string KEY;
-        //private string KEY;
         public string Key
         {
             get
@@ -86,7 +76,6 @@ namespace Lab1
                 if (Alphabet.Contains(char.ToLower(Text[i])))
                 {
                     Upper = char.IsUpper(Text[i]);
-                    //EncryptedChar = (char)(((char.ToLower(Text[i]) + Key - Alphabet[0]) % Alphabet.Length) + Alphabet[0]);
                     EncryptedChar = Alphabet[(Alphabet.IndexOf(char.ToLower(Text[i])) + KeyInt) % Alphabet.Length];
                     EncryptedChar = Upper ? char.ToUpper(EncryptedChar) : EncryptedChar;
                 } else {
@@ -94,7 +83,6 @@ namespace Lab1
                 }
                 Result.Append(EncryptedChar);
             }
-            //Console.WriteLine(Result.ToString());
             return Result.ToString();
         }
 
@@ -108,7 +96,6 @@ namespace Lab1
                 if (Alphabet.Contains(char.ToLower(Text[i])))
                 {
                     Upper = char.IsUpper(Text[i]);
-                    //DecryptedChar = (char)(((char.ToLower(Text[i]) - Key - Alphabet[0]) % Alphabet.Length) + Alphabet[0]);
                     DecryptedChar = Alphabet[(Alphabet.IndexOf(char.ToLower(Text[i])) - KeyInt + Alphabet.Length) % Alphabet.Length];
                     DecryptedChar = Upper ? char.ToUpper(DecryptedChar) : DecryptedChar;
                 } else {
@@ -116,7 +103,6 @@ namespace Lab1
                 }
                 Result.Append(DecryptedChar);
             }
-            //Console.WriteLine(Result.ToString());
             return Result.ToString();
         }
     }

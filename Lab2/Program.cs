@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Lab1;
 
@@ -22,8 +20,6 @@ namespace Lab2
             EN.Name = "EN";
             VigenereCracker Cracker_UA = new(UA);
             VigenereCracker Cracker_EN = new(EN);
-            //Console.WriteLine(UA.Key);
-            //Console.WriteLine(EN.Key);
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

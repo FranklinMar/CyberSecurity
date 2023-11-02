@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Lab1;
 
 namespace Lab2
@@ -41,10 +39,6 @@ namespace Lab2
             }
             set
             {
-                /*if (value.Length > Alphabet.Length)
-                {
-                    throw new ArgumentOutOfRangeException("Key is bigger than the alphabet");
-                }*/
                 if (value == null || value.Length == 0)
                 {
                     throw new ArgumentException("Null or empty string as a key");
@@ -70,12 +64,10 @@ namespace Lab2
             {
                 this.Key = Key;
             }
-            //this.Key = Key;
         }
 
         public string Encrypt(string Text)
         {
-            //throw new NotImplementedException();
             int Counter = 0;
             StringBuilder Result = new();
             char EncryptedChar;
@@ -85,7 +77,6 @@ namespace Lab2
                 if (Alphabet.Contains(char.ToLower(Text[i])))
                 {
                     Upper = char.IsUpper(Text[i]);
-                    //Console.WriteLine(Counter % Key.Length);
                     EncryptedChar = Alphabet[(Alphabet.IndexOf(char.ToLower(Text[i])) + Alphabet.IndexOf(Key[Counter % Key.Length])) % Alphabet.Length];
                     EncryptedChar = Upper ? char.ToUpper(EncryptedChar) : EncryptedChar;
                     Counter++;
@@ -101,7 +92,6 @@ namespace Lab2
 
         public string Decrypt(string Text)
         {
-            //throw new NotImplementedException();
             int Counter = 0;
             StringBuilder Result = new();
             char DecryptedChar;
@@ -111,7 +101,6 @@ namespace Lab2
                 if (Alphabet.Contains(char.ToLower(Text[i])))
                 {
                     Upper = char.IsUpper(Text[i]);
-                    //Console.WriteLine((Alphabet.IndexOf(char.ToLower(Text[i])) - Alphabet.IndexOf(Key[Counter % Key.Length]) + Alphabet.Length) % Alphabet.Length);
                     DecryptedChar = Alphabet[(Alphabet.IndexOf(char.ToLower(Text[i])) - Alphabet.IndexOf(Key[Counter % Key.Length]) + Alphabet.Length) % Alphabet.Length];
                     DecryptedChar = Upper ? char.ToUpper(DecryptedChar) : DecryptedChar;
                     Counter++;

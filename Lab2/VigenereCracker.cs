@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using Lab1;
-using System.IO;
 
 namespace Lab2
 {
@@ -39,22 +37,10 @@ namespace Lab2
                 Cypher.Key = value;
             }
         }
-        //private string[] Dictionary;
         private string _Regex;
-        public VigenereCracker(TrithemiusCypher Cypher/*, string Dictionary*/)
+        public VigenereCracker(TrithemiusCypher Cypher)
         {
             this.Cypher = Cypher;
-            /*List<string> ListDict = new();
-            using (StreamReader reader = new(
-                new FileStream(Dictionary, FileMode.Open), new UTF8Encoding())) // do anything you want, e.g. read it
-            {
-                while (!reader.EndOfStream)
-                {
-                    ListDict.Add(reader.ReadLine().ToLower());
-                }
-                // ...
-            }
-            this.Dictionary = ListDict.ToArray();*/
         }
 
         public string Crack(string Text)
@@ -84,7 +70,6 @@ namespace Lab2
 
         public Dictionary<string, int> KeysExamination(string PlainText, string EncryptedText, List<int> KeysLengths)
         {
-            // int MatchingWords;
             PlainText = new string(PlainText.Where(c => char.IsLetter(c)).ToArray());
             EncryptedText = new string(EncryptedText.Where(c => char.IsLetter(c)).ToArray());
             string[] PlainWords = PlainText.Split(' ');
@@ -95,27 +80,17 @@ namespace Lab2
             {
                 throw new ArgumentException("Encrypted and decrypted don't match by lengths");
             }
-            /*int MaxIndex = 0;
-            int Max = PlainWords[0].Length;*/
             for (int i = 0; i < PlainWords.Length; i++)
             {
                 if (PlainWords[i].Length != EncryptedWords[i].Length)
                 {
                     throw new ArgumentException("Encrypted and decrypted don't match by word lengths");
                 }
-                /*if (PlainWords[i].Length > Max)
-                {
-                    Max = PlainWords[i].Length;
-                    MaxIndex = i;
-                }*/
             }
             string WholePlainText = Regex.Replace(PlainText, _Regex, "");
             string WholeEncryptedText = Regex.Replace(EncryptedText, _Regex, "");
-            //string PlainWord;
-            //string EncryptedWord;
             for (int i = 0; i < KeysLengths.Count; i++)
             {
-                //MatchingWords = 0;
                 Key = new();
                 for (int j = 0; j < KeysLengths[i]; j++)
                 {

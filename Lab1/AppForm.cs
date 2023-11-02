@@ -164,10 +164,8 @@ namespace Lab1
             } catch(Exception exception)
             {
                 MessageBox.Show($"Unexpected error.\n{exception.Message}");
-                //cracker.Key = Key;
                 return;
             }
-            //cracker.Key = Key;
             keyInput.Text = Key;
             if (cracked != "")
             {

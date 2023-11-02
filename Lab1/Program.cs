@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Lab1
@@ -14,7 +12,7 @@ namespace Lab1
         [STAThread]
         static void Main()
         {
-            //AppForm.AllocConsole();
+            // AppForm.AllocConsole();
             Cypher UA = new("אבגד´הו÷זחט³¿יךכלםמןנסעףפץצקרשü‏ÿ", 1);
             UA.Name = "UA";
             Cypher EN = new("abcdefghijklmnopqrstuvwxyz", 1);

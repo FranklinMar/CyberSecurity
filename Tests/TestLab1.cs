@@ -1,7 +1,5 @@
 using NUnit.Framework;
 using Lab1;
-using System.Text;
-using System;
 
 namespace Tests
 {
@@ -23,12 +21,6 @@ namespace Tests
             Cypher_EN.KeyInt = 1;
             string PlainText = "Hello world!";
             string EncryptedText = "Ifmmp xpsme!";
-            /*StringBuilder EncryptedText = new();
-            for (int i = 0; i < PlainText.Length; i++)
-            {
-                EncryptedText.Append(Convert.ToChar(char.IsLetter(PlainText[i]) ? (PlainText[i] + 1) % 26: PlainText[i]));
-            }
-            Assert.AreEqual(EncryptedText.ToString(), Cypher_EN.Encrypt(PlainText)); // "Ifmmp xpsme!"*/
             Assert.AreEqual(EncryptedText, Cypher_EN.Encrypt(PlainText));
         }
 
@@ -36,14 +28,8 @@ namespace Tests
         public void Test_Decrypt_EN_Key_1()
         {
             Cypher_EN.KeyInt = 1;
-            string PlainText = "Ifmmp xpsme!"; // "Hello world!"
+            string PlainText = "Ifmmp xpsme!";
             string DecryptedText = "Hello world!";
-            /*StringBuilder DecryptedText = new();
-            for (int i = 0; i < PlainText.Length; i++)
-            {
-                DecryptedText.Append(Convert.ToChar(char.IsLetter(PlainText[i]) ? (PlainText[i] + 26 - 1) % 26 : PlainText[i]));
-            }
-            Assert.AreEqual(DecryptedText.ToString(), Cypher_EN.Decrypt(PlainText)); // "Hello world!"*/
             Assert.AreEqual(DecryptedText, Cypher_EN.Decrypt(PlainText));
         }
         [Test]
