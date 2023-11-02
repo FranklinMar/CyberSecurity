@@ -65,7 +65,6 @@ namespace Lab1
             this.header.Size = new System.Drawing.Size(198, 33);
             this.header.TabIndex = 0;
             this.header.Text = "Сryptographer";
-            this.header.Click += new System.EventHandler(this.label1_Click);
             // 
             // loadFileButton
             // 
@@ -87,7 +86,6 @@ namespace Lab1
             this.labelFile.Size = new System.Drawing.Size(98, 23);
             this.labelFile.TabIndex = 2;
             this.labelFile.Text = "Select File";
-            this.labelFile.Click += new System.EventHandler(this.labelFile_Click);
             // 
             // toolPanel
             // 
@@ -193,7 +191,6 @@ namespace Lab1
             this.label1.Size = new System.Drawing.Size(85, 23);
             this.label1.TabIndex = 8;
             this.label1.Text = "Alphabet";
-            this.label1.Click += new System.EventHandler(this.label1_Click_1);
             // 
             // alphabet
             // 
@@ -261,7 +258,6 @@ namespace Lab1
             this.textField.Size = new System.Drawing.Size(700, 188);
             this.textField.TabIndex = 4;
             this.textField.Text = "";
-            this.textField.TextChanged += new System.EventHandler(this.textField_TextChanged);
             // 
             // resultText
             // 
@@ -283,7 +279,6 @@ namespace Lab1
             this.result.Name = "result";
             this.result.Size = new System.Drawing.Size(700, 188);
             this.result.TabIndex = 6;
-            this.result.TextChanged += new System.EventHandler(this.result_TextChanged);
             // 
             // rawText
             // 
@@ -319,7 +314,7 @@ namespace Lab1
             this.Controls.Add(this.mainPanel);
             this.Name = "AppForm";
             this.Text = "Cyphering";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Load += new System.EventHandler(this.AppLoad);
             this.toolPanel.ResumeLayout(false);
             this.toolPanel.PerformLayout();
             this.ResumeLayout(false);

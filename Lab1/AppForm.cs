@@ -16,9 +16,6 @@ namespace Lab1
     {
         private List<ICypher> Cyphers;
         private List<ICracker> Crackers;
-        // private string Key;
-        // private bool About = false;
-        // private bool Selected = false;
 
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -33,13 +30,12 @@ namespace Lab1
                     cypher.Key = Key;
                 }
             }
-            //this.Key = Key;
             this.Cyphers = Cyphers;
             this.Crackers = Crackers;
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void AppLoad(object sender, EventArgs e)
         {
             AscButton.Hide();
             DesButton.Hide();
@@ -49,11 +45,6 @@ namespace Lab1
             {
                 alphabet.Items.Add(cypher.Name);
             }
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void loadFileButton_Click(object sender, EventArgs e)
@@ -73,10 +64,6 @@ namespace Lab1
                 // ...
             }
             //}
-        }
-
-        private void labelFile_Click(object sender, EventArgs e)
-        {
         }
 
         private void saveFileButton_Click(object sender, EventArgs e)
@@ -118,21 +105,6 @@ namespace Lab1
             result.Text = cypher.Decrypt(textField.Text);
         }
 
-        private void textField_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cypheredText_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void result_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             AscButton.Show();
@@ -144,25 +116,12 @@ namespace Lab1
                 return;
             }
             keyInput.Text = Cypher.Key;
-            // keyInput.PlaceholderText = Cypher.Key;
-            // keyInput.Show();
-        }
-
-        private void label1_Click_1(object sender, EventArgs e)
-        {
-
         }
 
         private void aboutButton_Click(object sender, EventArgs e)
         {
-            /*About = !About;
-            if (About)
-            {*/
             About About = new();
             About.Show();
-            /*} else {
-                Close();
-            }*/
         }
 
         private void rawText_Click(object sender, EventArgs e)
@@ -188,7 +147,6 @@ namespace Lab1
                 return;
             }
             
-            //int Key = cracker.Key;
             string Key = cracker.Key;
             string cracked;
             try
@@ -200,7 +158,6 @@ namespace Lab1
                 cracker.Key = Key;
                 return;
             }
-            // Console.WriteLine("'" + crack + "'");
             cracker.Key = Key;
             result.Text = cracked;
         }
@@ -209,12 +166,6 @@ namespace Lab1
 
         private void KeyChanged(object sender, EventArgs e)
         {
-            /*Dictionary<ICypher, String> Keys = new();
-            foreach (ICypher cypher in Cyphers)
-            {
-                Keys.Add(cypher, cypher.Key);
-            }*/
-
             if (alphabet.SelectedItem == null)
             {
                 MessageBox.Show("Please, select alphabet to cypher");
@@ -228,19 +179,11 @@ namespace Lab1
             }
             try
             {
-                /*foreach (ICypher cypher in Cyphers)
-                {
-                    cypher.Key = keyInput.Text;
-                }*/
                 Cypher.Key = keyInput.Text;
             }
             catch (Exception exception)
             {
                 MessageBox.Show($"Unexpected error.\n{exception.Message}");
-                /*foreach (ICypher cypher in Cyphers)
-                {
-                    cypher.Key = Keys[cypher];
-                }*/
             }
         }
 
@@ -264,20 +207,12 @@ namespace Lab1
             }
             try
             {
-                /*foreach (ICypher cypher in Cyphers)
-                {
-                    cypher.Key = keyInput.Text;
-                }*/
                 keyInput.Text = Cypher.Alphabet;
                 Cypher.Key = keyInput.Text;
             }
             catch (Exception exception)
             {
                 MessageBox.Show($"Unexpected error.\n{exception.Message}");
-                /*foreach (ICypher cypher in Cyphers)
-                {
-                    cypher.Key = Keys[cypher];
-                }*/
             }
         }
 
@@ -296,21 +231,12 @@ namespace Lab1
             }
             try
             {
-                /*foreach (ICypher cypher in Cyphers)
-                {
-                    cypher.Key = keyInput.Text;
-                }*/
-                
                 keyInput.Text = new string(Cypher.Alphabet.ToCharArray().Reverse().ToArray());
                 Cypher.Key = keyInput.Text;
             }
             catch (Exception exception)
             {
                 MessageBox.Show($"Unexpected error.\n{exception.Message}");
-                /*foreach (ICypher cypher in Cyphers)
-                {
-                    cypher.Key = Keys[cypher];
-                }*/
             }
         }
     }
