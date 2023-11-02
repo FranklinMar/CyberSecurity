@@ -9,7 +9,7 @@ using System.IO;
 
 namespace Lab2
 {
-    public class TrithemiusCracker: ICracker;
+    public class VigenereCracker: ICracker
     {
         private TrithemiusCypher CYPHER { get; set; }
         public ICypher Cypher
@@ -25,6 +25,7 @@ namespace Lab2
                     throw new ArgumentException("Invalid type of Cypher property");
                 }
                 CYPHER = value as TrithemiusCypher;
+                _Regex = $"[^{CYPHER.Alphabet[0]}-{CYPHER.Alphabet[CYPHER.Alphabet.Length - 1]}]";
             }
         }
         public string Key
@@ -38,11 +39,12 @@ namespace Lab2
                 Cypher.Key = value;
             }
         }
-        private string[] Dictionary;
-        public TrithemiusCracker(TrithemiusCypher Cypher, string Dictionary)
+        //private string[] Dictionary;
+        private string _Regex;
+        public VigenereCracker(TrithemiusCypher Cypher/*, string Dictionary*/)
         {
             this.Cypher = Cypher;
-            List<string> ListDict = new();
+            /*List<string> ListDict = new();
             using (StreamReader reader = new(
                 new FileStream(Dictionary, FileMode.Open), new UTF8Encoding())) // do anything you want, e.g. read it
             {
@@ -52,44 +54,87 @@ namespace Lab2
                 }
                 // ...
             }
-            this.Dictionary = ListDict.ToArray();
+            this.Dictionary = ListDict.ToArray();*/
         }
 
         public string Crack(string Text)
         {
-            /*int Key = 0;
-            int MatchingWords;
-            string[] Words = Text.Split(' ');
-            for (int i = 1; i <= Cypher.Alphabet.Length; i++)
+            throw new NotImplementedException();
+        }
+        
+        public string Crack(string PlainText, string EncryptedText)
+        {
+            var KeysLengths = KasiskiExamination(EncryptedText);
+            var Keys = KeysExamination(PlainText, EncryptedText, KeysLengths);
+            if (PlainText.Length != EncryptedText.Length)
             {
-                CYPHER.KeyInt = i;
-                MatchingWords = 0;
-                for (int j = 0; j < Words.Length; j++)
-                {
-                    string Word = Cypher.Decrypt(Words[j]);
-                    Word = new string(Word.Where(c => !char.IsPunctuation(c)).ToArray());
-                    Word = Word.ToLower();
-                    if (Dictionary.Contains(Word))
-                    {
-                        MatchingWords++;
-                        
-                    }
-                }
-                if (MatchingWords / Words.Length >= 0.5)
-                {
-                    Key = i;
-                    break;
-                }
+                throw new ArgumentException("Encrypted and decrypted texts have different lengths");
             }
+
             try
             {
-                CYPHER.KeyInt = Key;
-                return Cypher.Decrypt(Text);
+                Cypher.Key = Keys.First(Pair => Pair.Value.Equals(Keys.Values.Max())).Key;
+                return Cypher.Key;
             }
             catch (ArgumentOutOfRangeException)
             {
                 throw new Exception("Unable to crack the cypher.");
-            }*/
+            }
+        }
+
+        public Dictionary<string, int> KeysExamination(string PlainText, string EncryptedText, List<int> KeysLengths)
+        {
+            // int MatchingWords;
+            PlainText = new string(PlainText.Where(c => char.IsLetter(c)).ToArray());
+            EncryptedText = new string(EncryptedText.Where(c => char.IsLetter(c)).ToArray());
+            string[] PlainWords = PlainText.Split(' ');
+            string[] EncryptedWords = EncryptedText.Split(' ');
+            StringBuilder Key;
+            Dictionary<string, int> Result = new();
+            if (PlainWords.Length != EncryptedWords.Length)
+            {
+                throw new ArgumentException("Encrypted and decrypted don't match by lengths");
+            }
+            /*int MaxIndex = 0;
+            int Max = PlainWords[0].Length;*/
+            for (int i = 0; i < PlainWords.Length; i++)
+            {
+                if (PlainWords[i].Length != EncryptedWords[i].Length)
+                {
+                    throw new ArgumentException("Encrypted and decrypted don't match by word lengths");
+                }
+                /*if (PlainWords[i].Length > Max)
+                {
+                    Max = PlainWords[i].Length;
+                    MaxIndex = i;
+                }*/
+            }
+            string WholePlainText = Regex.Replace(PlainText, _Regex, "");
+            string WholeEncryptedText = Regex.Replace(EncryptedText, _Regex, "");
+            //string PlainWord;
+            //string EncryptedWord;
+            for (int i = 0; i <= KeysLengths.Count; i++)
+            {
+                //MatchingWords = 0;
+                Key = new();
+                for (int j = 0; j < KeysLengths[i]; j++)
+                {
+                    int Index = (Cypher.Alphabet.IndexOf(WholeEncryptedText[j]) - Cypher.Alphabet.IndexOf(WholePlainText[j]) + Cypher.Alphabet.Length) % Cypher.Alphabet.Length;
+                    Key.Append(Cypher.Alphabet[Index]);
+                }
+                Cypher.Key = Key.ToString();
+                Result[Cypher.Key] = 0;
+                EncryptedWords = Cypher.Decrypt(EncryptedText).Split(" ");
+                
+                for (int j = 0; j < EncryptedWords.Length; j++)
+                {
+                    if (EncryptedWords[j] == PlainWords[j])
+                    {
+                        Result[Cypher.Key]++;
+                    }
+                }
+            }
+            return Result;
         }
 
         public List<int> KasiskiExamination(string Text)
@@ -104,11 +149,12 @@ namespace Lab2
 
             return SortedFactors.Keys.ToList();
         }
+
         public Dictionary<string, List<int>> FindRepeatedSequencesSpacings(string message)
         {
             Dictionary<string, List<int>> Result = new();
 
-            string FilteredMessage = Regex.Replace(message.ToLower(), $"[^{Cypher.Alphabet[0]}-{Cypher.Alphabet[Cypher.Alphabet.Length - 1]}]", "");
+            string FilteredMessage = Regex.Replace(message.ToLower(), _Regex, "");
             string CurrentSequence;
             int SequencePos;
             int LengthApart;

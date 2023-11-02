@@ -151,14 +151,24 @@ namespace Lab1
             string cracked;
             try
             {
-               cracked = cracker.Crack(textField.Text);
+                if (resultText.Text == "")
+                {
+                    cracked = cracker.Crack(textField.Text);
+                } else
+                {
+                    Key = cracker.Crack(textField.Text, resultText.Text);
+                }
+            } catch (NotImplementedException)
+            {
+                cracked = cracker
             } catch(Exception exception)
             {
                 MessageBox.Show($"Unexpected error.\n{exception.Message}");
                 cracker.Key = Key;
                 return;
             }
-            cracker.Key = Key;
+            //cracker.Key = Key;
+            keyInput.Text = Key;
             result.Text = cracked;
         }
 

@@ -103,5 +103,10 @@ namespace Lab1
                 throw new Exception("Unable to crack the cypher.");
             }
         }
+        
+        public string Crack(string PlainText, string EncryptedText)
+        {
+            return Crack(EncryptedText);
+        }
    }
 }
