@@ -290,7 +290,6 @@ namespace Lab1
             this.rawText.Size = new System.Drawing.Size(108, 23);
             this.rawText.TabIndex = 7;
             this.rawText.Text = "Plain Text:";
-            this.rawText.Click += new System.EventHandler(this.rawText_Click);
             // 
             // mainPanel
             // 

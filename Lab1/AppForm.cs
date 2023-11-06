@@ -20,6 +20,11 @@ namespace Lab1
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool AllocConsole();
+        public static void AllocateConsole()
+        {
+            AllocConsole();
+            Console.OutputEncoding = Encoding.UTF8;
+        }
 
         public AppForm(List<ICypher> Cyphers, List<ICracker> Crackers, string Key = null)
         {
@@ -124,11 +129,6 @@ namespace Lab1
             About.Show();
         }
 
-        private void rawText_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void crack_Click(object sender, EventArgs e)
         {
             if (alphabet.SelectedItem == null)
@@ -151,16 +151,16 @@ namespace Lab1
             string cracked = "";
             try
             {
-                if (resultText.Text == "")
+                if (result.Text == "")
                 {
                     cracked = cracker.Crack(textField.Text);
                 } else
                 {
-                    Key = cracker.Crack(textField.Text, resultText.Text);
+                    Key = cracker.Crack(textField.Text, result.Text);
                 }
             } catch (NotImplementedException)
             {
-                Key = cracker.Crack(textField.Text, resultText.Text);
+                Key = cracker.Crack(textField.Text, result.Text);
             } catch(Exception exception)
             {
                 MessageBox.Show($"Unexpected error.\n{exception.Message}");
@@ -172,8 +172,6 @@ namespace Lab1
                 result.Text = cracked;
             }
         }
-
-
 
         private void KeyChanged(object sender, EventArgs e)
         {
@@ -190,6 +188,7 @@ namespace Lab1
             }
             try
             {
+                keyInput.Text = keyInput.Text.ToLower();
                 Cypher.Key = keyInput.Text;
             }
             catch (Exception exception)

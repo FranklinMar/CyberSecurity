@@ -13,7 +13,7 @@ namespace Lab2
         [STAThread]
         static void Main()
         {
-            //AppForm.AllocConsole();
+            //AppForm.AllocateConsole();
             TrithemiusCypher UA = new("אבגד´הו÷זחט³¿יךכלםמןנסעףפץצקרשü‏ÿ");
             UA.Name = "UA";
             TrithemiusCypher EN = new("abcdefghijklmnopqrstuvwxyz");

@@ -23,7 +23,7 @@ namespace Lab2
                     throw new ArgumentException("Invalid type of Cypher property");
                 }
                 CYPHER = value as TrithemiusCypher;
-                _Regex = $"[^{CYPHER.Alphabet[0]}-{CYPHER.Alphabet[CYPHER.Alphabet.Length - 1]}]";
+                _Regex = $"[^{CYPHER.Alphabet}]";
             }
         }
         public string Key
@@ -50,11 +50,15 @@ namespace Lab2
         
         public string Crack(string PlainText, string EncryptedText)
         {
-            var KeysLengths = KasiskiExamination(EncryptedText);
-            var Keys = KeysExamination(PlainText, EncryptedText, KeysLengths);
+            //var KeysLengths = KasiskiExamination(EncryptedText);
+            //KeysLengths.ForEach(item => Console.WriteLine($"\t{item}"));
+            var KeysLengths = GenerateKeys(EncryptedText);
+            var Keys = KeysExamination(PlainText, EncryptedText/*);*/, KeysLengths);
+            //Keys.ToList().ForEach(item => Console.WriteLine($"\t{item.Key} - {item.Value}"));
             if (PlainText.Length != EncryptedText.Length)
             {
-                throw new ArgumentException("Encrypted and decrypted texts have different lengths");
+                throw new ArgumentException($"Encrypted and decrypted texts have different lengths\n" +
+                    $"Plain: {PlainText.Length}\nEncrypted: {EncryptedText.Length}");
             }
 
             try
@@ -68,17 +72,36 @@ namespace Lab2
             }
         }
 
-        public Dictionary<string, int> KeysExamination(string PlainText, string EncryptedText, List<int> KeysLengths)
+        public List<int> GenerateKeys(string EncryptedText)
         {
-            PlainText = new string(PlainText.Where(c => char.IsLetter(c)).ToArray());
-            EncryptedText = new string(EncryptedText.Where(c => char.IsLetter(c)).ToArray());
+            List<int> Result = new();
+            string Text = new string(EncryptedText.Trim().Where(c => char.IsLetter(c)).ToArray());
+            Text = Regex.Replace(Text, _Regex, "");
+            for (int i = 1; i <= Text.Length; i++)
+            {
+                Result.Add(i);
+            }
+            return Result;
+        }
+
+        public Dictionary<string, double> KeysExamination(string PlainText, string EncryptedText/*)*/, List<int> KeysLengths)
+        {
+            PlainText = new string(PlainText.Trim().Where(c => char.IsLetter(c) || char.IsWhiteSpace(c)).ToArray()).ToLower();
+            EncryptedText = new string(EncryptedText.Trim().Where(c => char.IsLetter(c) || char.IsWhiteSpace(c)).ToArray()).ToLower();
+            if (PlainText.Length != EncryptedText.Length)
+            {
+                throw new ArgumentException("Encrypted and decrypted texts don't match by lengths\n" +
+                    $"Plain: {PlainText.Length}\nEncrypted: {EncryptedText.Length}"); ;
+            }
             string[] PlainWords = PlainText.Split(' ');
             string[] EncryptedWords = EncryptedText.Split(' ');
+            string[] DecryptedWords;
             StringBuilder Key;
-            Dictionary<string, int> Result = new();
+            Dictionary<string, double> Result = new();
             if (PlainWords.Length != EncryptedWords.Length)
             {
-                throw new ArgumentException("Encrypted and decrypted don't match by lengths");
+                throw new ArgumentException("Encrypted and decrypted wordlists don't match by lengths\n" +
+                    $"Plain: {PlainWords.Length}\nEncrypted: {EncryptedWords.Length}");
             }
             for (int i = 0; i < PlainWords.Length; i++)
             {
@@ -89,21 +112,42 @@ namespace Lab2
             }
             string WholePlainText = Regex.Replace(PlainText, _Regex, "");
             string WholeEncryptedText = Regex.Replace(EncryptedText, _Regex, "");
+            //List<int> KeysLengths = new();
+            //Console.WriteLine(WholePlainText);
+            //Console.WriteLine();
+            //Console.WriteLine(WholeEncryptedText);
+            //Console.WriteLine();
+            /*for (int i = 1; i <= WholePlainText.Length; i++)
+            {
+                KeysLengths.Add(i);
+            }*/
             for (int i = 0; i < KeysLengths.Count; i++)
             {
                 Key = new();
                 for (int j = 0; j < KeysLengths[i]; j++)
                 {
+                    //Console.WriteLine($"Encrypted char: {WholeEncryptedText[j]}| Index: {Cypher.Alphabet.IndexOf(WholeEncryptedText[j])}");
+                    //Console.WriteLine($"Decrypted char: {WholePlainText[j]}| Index: {Cypher.Alphabet.IndexOf(WholePlainText[j])}");
                     int Index = (Cypher.Alphabet.IndexOf(WholeEncryptedText[j]) - Cypher.Alphabet.IndexOf(WholePlainText[j]) + Cypher.Alphabet.Length) % Cypher.Alphabet.Length;
+                    //Console.WriteLine($"Key char: {Cypher.Alphabet[Index]}| Index: {Index}");
+                    //Alphabet[(Alphabet.IndexOf(char.ToLower(Text[i])) - Alphabet.IndexOf(Key[Counter % Key.Length]) + Alphabet.Length) % Alphabet.Length]
                     Key.Append(Cypher.Alphabet[Index]);
+                }
+                // Якщо є підстрока (більше 1 символа), що повторюється постійно
+                // If substring exists inside a substring, that repeatsitself all the time
+                if (Regex.IsMatch(Key.ToString(), @".*(.{2,}).*\1.*\1.*"))
+                {
+                    continue;
                 }
                 Cypher.Key = Key.ToString();
                 Result[Cypher.Key] = 0;
-                EncryptedWords = Cypher.Decrypt(EncryptedText).Split(" ");
-                
+                DecryptedWords = Cypher.Decrypt(EncryptedText).Split(" ");
+                //Console.WriteLine($"\tKey: {Cypher.Key}");
                 for (int j = 0; j < EncryptedWords.Length; j++)
                 {
-                    if (EncryptedWords[j] == PlainWords[j])
+                    //Console.WriteLine($"Encrypted Word: {DecryptedWords[j]}");
+                    //Console.WriteLine($"Decrypted Word: {PlainWords[j]}");
+                    if (DecryptedWords[j] == PlainWords[j])
                     {
                         Result[Cypher.Key]++;
                     }
@@ -119,7 +163,7 @@ namespace Lab2
 
             var LikelyKeyLengths = GetMostCommonFactors(SequenceList);
             var SortedFactors = (from entry in LikelyKeyLengths orderby entry.Value descending select entry)
-                     .Take(3)
+                     .Take(7)
                      .ToDictionary(pair => pair.Key, pair => pair.Value);
 
             return SortedFactors.Keys.ToList();
