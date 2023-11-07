@@ -68,9 +68,9 @@ namespace Lab1
             // 
             // loadFileButton
             // 
-            this.loadFileButton.Location = new System.Drawing.Point(110, 101);
+            this.loadFileButton.Location = new System.Drawing.Point(110, 48);
             this.loadFileButton.Name = "loadFileButton";
-            this.loadFileButton.Size = new System.Drawing.Size(75, 23);
+            this.loadFileButton.Size = new System.Drawing.Size(98, 23);
             this.loadFileButton.TabIndex = 1;
             this.loadFileButton.Text = "Browse";
             this.loadFileButton.UseVisualStyleBackColor = true;
@@ -81,7 +81,7 @@ namespace Lab1
             this.labelFile.AutoSize = true;
             this.labelFile.Font = new System.Drawing.Font("Roboto", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelFile.ForeColor = System.Drawing.Color.Snow;
-            this.labelFile.Location = new System.Drawing.Point(6, 101);
+            this.labelFile.Location = new System.Drawing.Point(6, 48);
             this.labelFile.Name = "labelFile";
             this.labelFile.Size = new System.Drawing.Size(98, 23);
             this.labelFile.TabIndex = 2;
@@ -116,7 +116,7 @@ namespace Lab1
             this.DesButton.BackColor = System.Drawing.SystemColors.Desktop;
             this.DesButton.Font = new System.Drawing.Font("Roboto", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.DesButton.ForeColor = System.Drawing.Color.White;
-            this.DesButton.Location = new System.Drawing.Point(110, 247);
+            this.DesButton.Location = new System.Drawing.Point(110, 194);
             this.DesButton.Name = "DesButton";
             this.DesButton.Size = new System.Drawing.Size(98, 29);
             this.DesButton.TabIndex = 13;
@@ -129,7 +129,7 @@ namespace Lab1
             this.AscButton.BackColor = System.Drawing.SystemColors.Desktop;
             this.AscButton.Font = new System.Drawing.Font("Roboto", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.AscButton.ForeColor = System.Drawing.Color.White;
-            this.AscButton.Location = new System.Drawing.Point(6, 247);
+            this.AscButton.Location = new System.Drawing.Point(6, 194);
             this.AscButton.Name = "AscButton";
             this.AscButton.Size = new System.Drawing.Size(98, 29);
             this.AscButton.TabIndex = 11;
@@ -139,9 +139,9 @@ namespace Lab1
             // 
             // keyInput
             // 
-            this.keyInput.Location = new System.Drawing.Point(85, 221);
+            this.keyInput.Location = new System.Drawing.Point(53, 168);
             this.keyInput.Name = "keyInput";
-            this.keyInput.Size = new System.Drawing.Size(100, 23);
+            this.keyInput.Size = new System.Drawing.Size(155, 23);
             this.keyInput.TabIndex = 12;
             this.keyInput.Click += new System.EventHandler(this.KeyClick);
             this.keyInput.TextChanged += new System.EventHandler(this.KeyChanged);
@@ -152,7 +152,7 @@ namespace Lab1
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Roboto", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label2.ForeColor = System.Drawing.Color.Snow;
-            this.label2.Location = new System.Drawing.Point(6, 221);
+            this.label2.Location = new System.Drawing.Point(6, 168);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(41, 23);
             this.label2.TabIndex = 11;
@@ -175,7 +175,7 @@ namespace Lab1
             // 
             this.aboutButton.Location = new System.Drawing.Point(6, 12);
             this.aboutButton.Name = "aboutButton";
-            this.aboutButton.Size = new System.Drawing.Size(190, 25);
+            this.aboutButton.Size = new System.Drawing.Size(202, 25);
             this.aboutButton.TabIndex = 9;
             this.aboutButton.Text = "About";
             this.aboutButton.UseVisualStyleBackColor = true;
@@ -186,7 +186,7 @@ namespace Lab1
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Roboto", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.Color.Snow;
-            this.label1.Location = new System.Drawing.Point(6, 185);
+            this.label1.Location = new System.Drawing.Point(6, 132);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(85, 23);
             this.label1.TabIndex = 8;
@@ -196,9 +196,9 @@ namespace Lab1
             // 
             this.alphabet.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.alphabet.FormattingEnabled = true;
-            this.alphabet.Location = new System.Drawing.Point(98, 185);
+            this.alphabet.Location = new System.Drawing.Point(98, 132);
             this.alphabet.Name = "alphabet";
-            this.alphabet.Size = new System.Drawing.Size(87, 22);
+            this.alphabet.Size = new System.Drawing.Size(110, 22);
             this.alphabet.TabIndex = 7;
             this.alphabet.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
@@ -230,9 +230,9 @@ namespace Lab1
             // 
             // saveFileButton
             // 
-            this.saveFileButton.Location = new System.Drawing.Point(110, 134);
+            this.saveFileButton.Location = new System.Drawing.Point(110, 81);
             this.saveFileButton.Name = "saveFileButton";
-            this.saveFileButton.Size = new System.Drawing.Size(75, 23);
+            this.saveFileButton.Size = new System.Drawing.Size(98, 23);
             this.saveFileButton.TabIndex = 4;
             this.saveFileButton.Text = "Save";
             this.saveFileButton.UseVisualStyleBackColor = true;
@@ -243,7 +243,7 @@ namespace Lab1
             this.labelFileSave.AutoSize = true;
             this.labelFileSave.Font = new System.Drawing.Font("Roboto", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelFileSave.ForeColor = System.Drawing.Color.Snow;
-            this.labelFileSave.Location = new System.Drawing.Point(6, 134);
+            this.labelFileSave.Location = new System.Drawing.Point(6, 81);
             this.labelFileSave.Name = "labelFileSave";
             this.labelFileSave.Size = new System.Drawing.Size(86, 23);
             this.labelFileSave.TabIndex = 3;
