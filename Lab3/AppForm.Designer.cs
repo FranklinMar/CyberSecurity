@@ -1,5 +1,5 @@
 ﻿
-namespace Lab1
+namespace Lab3
 {
     partial class AppForm
     {
@@ -33,14 +33,10 @@ namespace Lab1
             this.loadFileButton = new System.Windows.Forms.Button();
             this.labelFile = new System.Windows.Forms.Label();
             this.toolPanel = new System.Windows.Forms.Panel();
-            this.DesButton = new System.Windows.Forms.Button();
-            this.AscButton = new System.Windows.Forms.Button();
-            this.keyInput = new System.Windows.Forms.TextBox();
+            this.keyInput = new System.Windows.Forms.RichTextBox();
+            this.keyImportButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.crack = new System.Windows.Forms.Button();
             this.aboutButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.alphabet = new System.Windows.Forms.ComboBox();
             this.decypher = new System.Windows.Forms.Button();
             this.cypher = new System.Windows.Forms.Button();
             this.saveFileButton = new System.Windows.Forms.Button();
@@ -92,14 +88,10 @@ namespace Lab1
             this.toolPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.toolPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.toolPanel.Controls.Add(this.DesButton);
-            this.toolPanel.Controls.Add(this.AscButton);
             this.toolPanel.Controls.Add(this.keyInput);
+            this.toolPanel.Controls.Add(this.keyImportButton);
             this.toolPanel.Controls.Add(this.label2);
-            this.toolPanel.Controls.Add(this.crack);
             this.toolPanel.Controls.Add(this.aboutButton);
-            this.toolPanel.Controls.Add(this.label1);
-            this.toolPanel.Controls.Add(this.alphabet);
             this.toolPanel.Controls.Add(this.decypher);
             this.toolPanel.Controls.Add(this.cypher);
             this.toolPanel.Controls.Add(this.saveFileButton);
@@ -111,41 +103,26 @@ namespace Lab1
             this.toolPanel.Size = new System.Drawing.Size(223, 565);
             this.toolPanel.TabIndex = 3;
             // 
-            // DesButton
-            // 
-            this.DesButton.BackColor = System.Drawing.SystemColors.Desktop;
-            this.DesButton.Font = new System.Drawing.Font("Roboto", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.DesButton.ForeColor = System.Drawing.Color.White;
-            this.DesButton.Location = new System.Drawing.Point(110, 194);
-            this.DesButton.Name = "DesButton";
-            this.DesButton.Size = new System.Drawing.Size(98, 29);
-            this.DesButton.TabIndex = 13;
-            this.DesButton.Text = "Descending";
-            this.DesButton.UseVisualStyleBackColor = false;
-            this.DesButton.Click += new System.EventHandler(this.DesButton_Click);
-            // 
-            // AscButton
-            // 
-            this.AscButton.BackColor = System.Drawing.SystemColors.Desktop;
-            this.AscButton.Font = new System.Drawing.Font("Roboto", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.AscButton.ForeColor = System.Drawing.Color.White;
-            this.AscButton.Location = new System.Drawing.Point(6, 194);
-            this.AscButton.Name = "AscButton";
-            this.AscButton.Size = new System.Drawing.Size(98, 29);
-            this.AscButton.TabIndex = 11;
-            this.AscButton.Text = "Ascending";
-            this.AscButton.UseVisualStyleBackColor = false;
-            this.AscButton.Click += new System.EventHandler(this.AscButton_Click);
-            // 
             // keyInput
             // 
-            this.keyInput.Location = new System.Drawing.Point(53, 168);
+            this.keyInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.keyInput.Location = new System.Drawing.Point(48, 171);
             this.keyInput.Name = "keyInput";
-            this.keyInput.Size = new System.Drawing.Size(155, 23);
-            this.keyInput.TabIndex = 12;
-            this.keyInput.Click += new System.EventHandler(this.KeyClick);
-            this.keyInput.TextChanged += new System.EventHandler(this.KeyChanged);
-            this.keyInput.Leave += new System.EventHandler(this.KeyChanged);
+            this.keyInput.Size = new System.Drawing.Size(160, 115);
+            this.keyInput.TabIndex = 15;
+            this.keyInput.Text = "";
+            this.keyInput.TextChanged += new System.EventHandler(this.keyInput_TextChanged);
+            // 
+            // keyImportButton
+            // 
+            this.keyImportButton.Location = new System.Drawing.Point(48, 170);
+            this.keyImportButton.Name = "keyImportButton";
+            this.keyImportButton.Size = new System.Drawing.Size(160, 23);
+            this.keyImportButton.TabIndex = 14;
+            this.keyImportButton.Text = "Import from text";
+            this.keyImportButton.UseVisualStyleBackColor = true;
+            this.keyImportButton.Click += new System.EventHandler(this.keyImportButton_Click);
             // 
             // label2
             // 
@@ -158,19 +135,6 @@ namespace Lab1
             this.label2.TabIndex = 11;
             this.label2.Text = "Key";
             // 
-            // crack
-            // 
-            this.crack.BackColor = System.Drawing.SystemColors.Desktop;
-            this.crack.Font = new System.Drawing.Font("Roboto", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.crack.ForeColor = System.Drawing.Color.White;
-            this.crack.Location = new System.Drawing.Point(48, 292);
-            this.crack.Name = "crack";
-            this.crack.Size = new System.Drawing.Size(110, 70);
-            this.crack.TabIndex = 10;
-            this.crack.Text = "Crack";
-            this.crack.UseVisualStyleBackColor = false;
-            this.crack.Click += new System.EventHandler(this.crack_Click);
-            // 
             // aboutButton
             // 
             this.aboutButton.Location = new System.Drawing.Point(6, 12);
@@ -180,27 +144,6 @@ namespace Lab1
             this.aboutButton.Text = "About";
             this.aboutButton.UseVisualStyleBackColor = true;
             this.aboutButton.Click += new System.EventHandler(this.aboutButton_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Roboto", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.ForeColor = System.Drawing.Color.Snow;
-            this.label1.Location = new System.Drawing.Point(6, 132);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(85, 23);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Alphabet";
-            // 
-            // alphabet
-            // 
-            this.alphabet.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.alphabet.FormattingEnabled = true;
-            this.alphabet.Location = new System.Drawing.Point(98, 132);
-            this.alphabet.Name = "alphabet";
-            this.alphabet.Size = new System.Drawing.Size(110, 22);
-            this.alphabet.TabIndex = 7;
-            this.alphabet.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // decypher
             // 
@@ -330,20 +273,16 @@ namespace Lab1
         private System.Windows.Forms.Button saveFileButton;
         private System.Windows.Forms.Label labelFileSave;
         private System.Windows.Forms.RichTextBox textField;
-        private System.Windows.Forms.Button decypher;
         private System.Windows.Forms.Button cypher;
         private System.Windows.Forms.Label resultText;
         private System.Windows.Forms.TextBox result;
         private System.Windows.Forms.Label rawText;
-        private System.Windows.Forms.ComboBox alphabet;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel mainPanel;
         private System.Windows.Forms.Button aboutButton;
-        private System.Windows.Forms.Button crack;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox keyInput;
-        private System.Windows.Forms.Button DesButton;
-        private System.Windows.Forms.Button AscButton;
+        private System.Windows.Forms.Button keyImportButton;
+        private System.Windows.Forms.Button decypher;
+        private System.Windows.Forms.RichTextBox keyInput;
     }
 }
 

@@ -7,6 +7,10 @@
     "Lab2": {
       "commandName": "Executable",
       "executablePath": "C:\\Users\\1\\source\\repos\\CyberSecurity\\Lab2\\bin\\Debug\\net5.0-windows\\Lab2.exe"
+    },
+    "Lab3": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Users\\1\\source\\repos\\CyberSecurity\\Lab3\\bin\\Debug\\net5.0-windows\\Lab3.exe"
     }
   }
 }
